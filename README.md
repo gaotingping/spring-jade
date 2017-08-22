@@ -1,0 +1,5 @@
+# spring-jade-support
+1.从rose中分离出jade，以方便单独使用
+2.微改动MasterSlaveDataSourceFactory让其适用
+  在“立写立读”的场景下，读主库的业务,详情见:@UseMaster
+3.扩展数据源访问部分，增加访问策略(多数据源的负载均衡，管理和自动上下线)

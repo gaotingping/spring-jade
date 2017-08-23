@@ -20,8 +20,6 @@ public class RandomDataSourceFactory implements DataSourceFactory {
     private Random random = new Random();
 
     private List<DataSourceHolder> dataSources = new ArrayList<>(10);
-    
-    private List<DataSourceHolder> downSlaves = new ArrayList<>(10);
 
     public RandomDataSourceFactory() {
     	
@@ -56,25 +54,4 @@ public class RandomDataSourceFactory implements DataSourceFactory {
         
         return dataSources.get(index);
     }
-
-    //以下方法自己折腾的
-	public List<DataSourceHolder> getDataSources() {
-		return dataSources;
-	}
-
-	public void addDataSourceHolder(int index) {
-		 //FIXME 并发
-		 dataSources.add(downSlaves.get(index));
-		 downSlaves.remove(index);
-	}
-
-	public void removeDataSourceHolder(int index) {
-		//FIXME 并发
-		downSlaves.add(dataSources.get(index));
-		dataSources.remove(index);
-	}
-
-	public List<DataSourceHolder> getDownSlaves() {
-		return downSlaves;
-	}
 }

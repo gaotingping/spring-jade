@@ -7,7 +7,6 @@ import net.paoding.rose.jade.annotation.SQLType;
 import net.paoding.rose.jade.annotation.UseMaster;
 import net.paoding.rose.jade.dataaccess.DataSourceFactory;
 import net.paoding.rose.jade.dataaccess.DataSourceHolder;
-import net.paoding.rose.jade.dataaccess.datasource.RandomDataSourceFactory;
 import net.paoding.rose.jade.dataaccess.datasource.SimpleDataSourceFactory;
 import net.paoding.rose.jade.dataaccess.strategy.FailureNotice;
 import net.paoding.rose.jade.dataaccess.strategy.LoadBalance;
@@ -22,7 +21,7 @@ public class MsLoadDataSourceFactory implements MsSourceFactory {
 
     private DataSourceFactory master = new SimpleDataSourceFactory();
 
-    private RandomDataSourceFactory slaves = new RandomDataSourceFactory();
+    private ListDataSourceFactory slaves = new ListDataSourceFactory();
     
     private LoadBalance loadBalance;
     
@@ -32,7 +31,7 @@ public class MsLoadDataSourceFactory implements MsSourceFactory {
         this.master = master;
     }
 
-    public void setSlaves(RandomDataSourceFactory slaves) {
+    public void setSlaves(ListDataSourceFactory slaves) {
         this.slaves = slaves;
     }
 

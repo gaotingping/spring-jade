@@ -22,7 +22,6 @@ import org.springframework.util.CollectionUtils;
  * 作为程序的{#link DataSourceFactory}实现入口<br/>
  * 即所有写操作使用master，所有读操作使用slave<br/>
  * <p>  
- * 
  */
 public class MasterSlaveDataSourceFactory implements DataSourceFactory {
 
@@ -34,12 +33,6 @@ public class MasterSlaveDataSourceFactory implements DataSourceFactory {
     	
     }
 
-    /**
-     * 
-     * @param master
-     * @param slaves
-     * @param queryFromMaster true代表允许从master数据源查询数据
-     */
     public MasterSlaveDataSourceFactory(DataSource master, List<DataSource> slaves,
             boolean queryFromMaster) {
         if (queryFromMaster && !CollectionUtils.containsInstance(slaves, master)) {
@@ -50,23 +43,10 @@ public class MasterSlaveDataSourceFactory implements DataSourceFactory {
         setMasters(new SimpleDataSourceFactory(master));
     }
 
-    //------------------
-
-    /**
-     * 
-     * @param masters
-     * @see RandomDataSourceFactory
-     * @see SimpleDataSourceFactory
-     */
     public void setMasters(DataSourceFactory masters) {
         this.masters = masters;
     }
 
-    /**
-     * 
-     * @param slaves
-     * @see RandomDataSourceFactory
-     */
     public void setSlaves(DataSourceFactory slaves) {
         this.slaves = slaves;
     }
@@ -75,10 +55,6 @@ public class MasterSlaveDataSourceFactory implements DataSourceFactory {
     public DataSourceHolder getHolder(StatementMetaData metaData,
             Map<String, Object> runtimeProperties) {
     	
-    	/**
-    	 * 2015 by gtp
-    	 * force to use master
-    	 */
     	UseMaster useMaster = metaData.getMethod().getAnnotation(UseMaster.class);
     	if(useMaster!=null){
     		

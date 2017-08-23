@@ -15,29 +15,14 @@ public class SimpleDataSourceFactory implements DataSourceFactory {
 
     private DataSourceHolder dataSource;
 
-    /**
-     * 构造候还得继续调用 {@link #setDataSource(DataSource)} 设置数据源
-     */
     public SimpleDataSourceFactory() {
     	
     }
 
-    /**
-     * 提供的数据源要求非null
-     * 
-     * @param dataSource
-     */
     public SimpleDataSourceFactory(DataSource dataSource) {
         setDataSource(dataSource);
     }
 
-    /**
-     * 设置数据源。
-     * <p>
-     * 提供的数据源要求非null
-     * 
-     * @param dataSource
-     */
     public void setDataSource(DataSource dataSource) {
         if (dataSource == null) {
             throw new NullPointerException("dataSource");
